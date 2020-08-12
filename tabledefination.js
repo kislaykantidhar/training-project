@@ -32,14 +32,13 @@ const Admin =sequelize.define('admin',{
 })
 
 const User =sequelize.define('user',{
-    created_by:{
-        type:DataTypes.INTEGER,
-        references:{
-            model:Admin,
-            key:'id',
-            deferrable:Deferrable.INITIALLY_IMMEDIATE
-        },
-        allowNull:false
+    emailid:{
+        type:DataTypes.STRING(30),
+        unique:true,
+        allowNull:false,
+        validate:{
+            isEmail:true
+        }
     },
     id:{
         type:DataTypes.INTEGER,
@@ -150,14 +149,14 @@ const LogTime=sequelize.define("logTime",{
 // }).catch(err=>{
 //     console.log(err);
 // })
-Admin.sync().then(()=>{
-    return User.sync()
+Admin.sync({force:true}).then(()=>{
+    return User.sync({force:true})
 }).then(()=>{
-    return Tasks.sync()
+    return Tasks.sync({force:true})
 }).then(()=>{
-    return Comments.sync()
+    return Comments.sync({force:true})
 }).then(()=>{
-    return LogTime.sync()
+    return LogTime.sync({force:true})
 }).then(()=>{
     console.log("All tables are created");
     return sequelize.close();

@@ -1,0 +1,26 @@
+{
+  "name": "training-project",
+  "version": "1.0.0",
+  "description": "Training project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kislaykantidhar/training-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kislaykantidhar/training-project/issues"
+  },
+  "homepage": "https://github.com/kislaykantidhar/training-project#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.3.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.4"
+  }
+}

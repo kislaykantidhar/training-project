@@ -24,7 +24,7 @@ const Admin =sequelize.define('admin',{
         allowNull:false
     },
     password:{
-        type:DataTypes.STRING(500),
+        type:DataTypes.STRING(50),
         allowNull:false
     }
     },{
@@ -51,7 +51,7 @@ const User =sequelize.define('user',{
         allowNull:false
     },
     password:{
-        type:DataTypes.STRING(500),
+        type:DataTypes.STRING(50),
         allowNull:false
     }
     },
@@ -129,7 +129,7 @@ const Comments=sequelize.define('comments',{
     timestamps: false
 })
 
-const LogTime=sequelize.define({
+const LogTime=sequelize.define("logTime",{
     taskid:{
         type:DataTypes.INTEGER,
         references:{
@@ -145,12 +145,25 @@ const LogTime=sequelize.define({
     timestamps: false
 })
 
-Promise.all([Admin.sync(),User.sync(),Tasks.sync(),Comments.sync(),LogTime.sync()]).then(()=>{
-    console.log("All tables have been successfully created")
-}).catch(err=>{
-    console.log(err);
+// Promise.all([Admin.sync(),User.sync(),Tasks.sync(),Comments.sync(),LogTime.sync()]).then(()=>{
+//     console.log("All tables have been successfully created")
+// }).catch(err=>{
+//     console.log(err);
+// })
+Admin.sync().then(()=>{
+    return User.sync()
+}).then(()=>{
+    return Tasks.sync()
+}).then(()=>{
+    return Comments.sync()
+}).then(()=>{
+    return LogTime.sync()
+}).then(()=>{
+    console.log("All tables are created");
+    return sequelize.close();
+}).then(()=>{
+    console.log("Connection closed");
 })
-
 // (async ()=>{
 //     await sequelize.sync({force:true});
 // })()

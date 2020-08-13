@@ -10,7 +10,7 @@ There are 5 tables:
 4. Comments
 5. LogTime
 
-[contents](https://github.com/kislaykantidhar/training-project/blob/master)
+contents
 1. dbFunctions:folder which functions to get and put data into database
 2. routes: this folder contains middleware functions which maintains the routes
 3. schema: This folder holds  ajv - schemas

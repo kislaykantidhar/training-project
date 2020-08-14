@@ -27,7 +27,7 @@ describe("checking the admin signup route",()=>{
         .send({name:name,email:email,password:password})
         .end((err,res)=>{
             expect(res).to.have.status(200);
-            expect(JSON.stringify(res.body)).to.equal(JSON.stringify({msg:"please enter data properly"}));
+            expect(JSON.stringify(res.body)).to.equal(JSON.stringify({msg:"emailid must be unique"}));
             done()
         })
         
@@ -60,7 +60,7 @@ describe("checking the admin signup route",()=>{
         .post('/signupAdmin')
         .send({email:chance.email(),name:"           ",password:"           "})
         .end((err,res)=>{
-            expect(res.body.msg).to.equal("please enter data properly");
+            expect(res.body.msg).to.equal("name should NOT be shorter than 3 characters");
             done()
         })
     })
@@ -69,7 +69,7 @@ describe("checking the admin signup route",()=>{
         .post('/signupAdmin')
         .send({email:chance.email(),name:chance.name(),password:chance.string({length:6})})
         .end((err,res)=>{
-            expect(res.body.msg).to.equal("please enter data properly");
+            expect(res.body.msg).to.equal("password should NOT be shorter than 8 characters");
             done()
         })
     })

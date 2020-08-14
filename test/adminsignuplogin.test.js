@@ -55,7 +55,7 @@ describe("checking the admin signup route",()=>{
             done()
         })
     })
-    it("signing up with password and name with spaces should return please enter data properly",(done)=>{
+    it("signing up with password and name with spaces should return name should NOT be shorter than 3 characters",(done)=>{
         chai.request('http://localhost:5227')
         .post('/signupAdmin')
         .send({email:chance.email(),name:"           ",password:"           "})
@@ -64,7 +64,7 @@ describe("checking the admin signup route",()=>{
             done()
         })
     })
-    it("signing up with password with characters less than 8 should return please enter data properly",(done)=>{
+    it("signing up with password with characters less than 8 should return password should NOT be shorter than 8 characters",(done)=>{
         chai.request('http://localhost:5227')
         .post('/signupAdmin')
         .send({email:chance.email(),name:chance.name(),password:chance.string({length:6})})

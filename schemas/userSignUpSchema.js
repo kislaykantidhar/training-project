@@ -1,8 +1,8 @@
 
-const adminSignUpSchema={
+
+const userSignUpSchema={
     "type":"object",
     "required":["name","email","password"],
-    "maxproperties":3,
     "properties":{
         "name":{
             "type":"string",
@@ -20,5 +20,4 @@ const adminSignUpSchema={
         }
     }
 }
-
-module.exports={adminSignUpSchema:adminSignUpSchema};
+module.exports={userSignUpSchema:userSignUpSchema};

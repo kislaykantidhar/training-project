@@ -1,26 +1,25 @@
 const express=require('express');
-router=express.Router();
-const {adminSignUpSchema}=require('../schemas/adminSignUpSchema');
-const {addAdmin}=require('../dbFunctions/addAdmin')
+const router=express.Router();
+const {userSignUpSchema}=require('../schemas/userSignUpSchema');
 const {encryptPassword}=require('../services/encryptPassword');
+const {addUser}=require('../dbFunctions/addUser');
 const Ajv=require('ajv');
 const ajv=new Ajv();
-router.post('/signupAdmin',(req,res)=>{
-    // console.log(req.body);
+
+router.post('/signupUser',(req,res)=>{
     if(req.body.name===undefined||req.body.email===undefined||req.body.password===undefined)
     res.sendStatus(403);
-    else
-    {
+    else{
         req.body.name=req.body.name.trim();
         req.body.password=req.body.password.trim();
         req.body.email=req.body.email.trim();
-        let adminSignUpValidate=ajv.compile(adminSignUpSchema)
-        let validate=adminSignUpValidate(req.body)
+        let userSignUpValidate=ajv.compile(userSignUpSchema);
+        let validate=userSignUpValidate(req.body);
         if(validate)
         {
             let {name,email,password}=req.body;
             encryptPassword(password).then(encrypted=>{
-                addAdmin(name,email,encrypted).then(()=>{
+                addUser(name,email,encrypted).then(()=>{
                     res.json({msg:"signed up successfully"});
                 }).catch((error)=>{
                     res.json({msg:error.errors[0].message});
@@ -29,11 +28,9 @@ router.post('/signupAdmin',(req,res)=>{
         }
         else
         {
-            res.json({msg:adminSignUpValidate.errors[0].dataPath.slice(1)+" "+adminSignUpValidate.errors[0].message});
+            res.json({msg:userSignUpValidate.errors[0].dataPath.slice(1)+" "+userSignUpValidate.errors[0].message});
         }
-        
     }
-    
 })
 
 module.exports=router;

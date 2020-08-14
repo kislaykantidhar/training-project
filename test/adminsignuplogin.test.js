@@ -33,7 +33,7 @@ describe("checking the admin signup route",()=>{
         
     })
 
-    it("Logining in with the same credentials",(done)=>{
+    it("Loging in with the same credentials",(done)=>{
         chai.request('http://localhost:5227')
         .post('/loginAdmin')
         .send({email:email,password:password})
@@ -45,6 +45,17 @@ describe("checking the admin signup route",()=>{
             done();
         })
     })
+
+    it("Loging in with wrong credentials",(done)=>{
+        chai.request('http://localhost:5227')
+        .post('/loginAdmin')
+        .send({email:email,password:"wrongpass"})
+        .end((err,res)=>{
+            expect(res.body.msg).to.equal("Your email Id or password is invalid");
+            done();
+        })
+    })
+
     it("signing up with no values:it would return 403",(done)=>{
         chai.request('http://localhost:5227')
         .post('/signupAdmin')

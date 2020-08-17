@@ -4,14 +4,14 @@ chai.use(chaihttp);
 let expect=chai.expect;
 let Chance=require('chance');
 let chance=new Chance();
-let email=chance.email({domain:"google.com"});
+let email=chance.email({domain:"gmail.com"});
     let name=chance.name();
     let password=chance.string({length:9});
-describe("checking the admin signup route",()=>{
+describe("checking the user signup route",()=>{
     
     it("sending new data value to get sign up",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupAdmin')
+        .post('/signupUser')
         .send({name:name,email:email,password:password})
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -23,7 +23,7 @@ describe("checking the admin signup route",()=>{
     })
     it("sending same data value to get sign up:it wont work because email exists already",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupAdmin')
+        .post('/signupUser')
         .send({name:name,email:email,password:password})
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -35,7 +35,7 @@ describe("checking the admin signup route",()=>{
 
     it("Loging in with the same credentials",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/loginAdmin')
+        .post('/loginUser')
         .send({email:email,password:password})
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -48,7 +48,7 @@ describe("checking the admin signup route",()=>{
 
     it("Loging in with wrong credentials",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/loginAdmin')
+        .post('/loginUser')
         .send({email:email,password:"wrongpass"})
         .end((err,res)=>{
             expect(res.body.msg).to.equal("Your email Id or password is invalid");
@@ -58,7 +58,7 @@ describe("checking the admin signup route",()=>{
 
     it("signing up with no values:it would return 403",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupAdmin')
+        .post('/signupUser')
         .send({})
         .end((err,res)=>{
             expect(res).to.have.status(403);
@@ -68,7 +68,7 @@ describe("checking the admin signup route",()=>{
     })
     it("signing up with password and name with spaces should return \"name\" is not allowed to be empty",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupAdmin')
+        .post('/signupUser')
         .send({email:chance.email(),name:"           ",password:"           "})
         .end((err,res)=>{
             expect(res.body.msg).to.equal("\"name\" is not allowed to be empty");
@@ -77,7 +77,7 @@ describe("checking the admin signup route",()=>{
     })
     it("signing up with password with characters less than 8 should return \"password\" length must be at least 8 characters long",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupAdmin')
+        .post('/signupUser')
         .send({email:chance.email({domain:"gmail.com"}),name:chance.name(),password:chance.string({length:6})})
         .end((err,res)=>{
             expect(res.body.msg).to.equal("\"password\" length must be at least 8 characters long");

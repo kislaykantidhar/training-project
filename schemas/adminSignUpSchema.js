@@ -1,24 +1,9 @@
+const Joi=require('joi');
+const adminSignUpSchema=Joi.object({
+    name:Joi.string().min(3).max(40).required(),
+    email:Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
+    password:Joi.string().min(8).max(12).required()
+})
 
-const adminSignUpSchema={
-    "type":"object",
-    "required":["name","email","password"],
-    "maxproperties":3,
-    "properties":{
-        "name":{
-            "type":"string",
-            "minLength": 3,
-            "maxLength": 40
-        },
-        "email":{
-            "type":"string",
-            "format":"email"
-        },
-        "password":{
-            "type":"string",
-            "minLength":8,
-            "maxLength":12
-        }
-    }
-}
 
 module.exports={adminSignUpSchema:adminSignUpSchema};

@@ -72,7 +72,8 @@ const Tasks=sequelize.define('tasks',{
     },
     id:{
         type:DataTypes.INTEGER,
-        primaryKey:true
+        primaryKey:true,
+        autoIncrement:true
     },
     title:{
         type:DataTypes.STRING(600),
@@ -90,7 +91,7 @@ const Tasks=sequelize.define('tasks',{
         }
     },
     created_at:{
-        type:DataTypes.DATE
+        type:DataTypes.DATEONLY
     },
     status:{
         type:DataTypes.STRING,
@@ -166,4 +167,4 @@ const LogTime=sequelize.define("logTimes",{
 //     console.log("Connection closed");
 // })
 
-module.exports={sequelize:sequelize,Admin:Admin,User:User,Tasks:Tasks,Comments:Comments,LogTime:LogTime}
+module.exports={Admin:Admin,User:User,Tasks:Tasks,Comments:Comments,LogTime:LogTime}

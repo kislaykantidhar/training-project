@@ -13,5 +13,7 @@ There are 5 tables:
 contents
 1. dbFunctions:folder which functions to get and put data into database
 2. routes: this folder contains middleware functions which maintains the routes
-3. schema: This folder holds  ajv - schemas
+3. schema: This folder holds  joi - schemas
 4. services: This folder contains some of the functions which are used in routes folder scripts or any where else
+
+

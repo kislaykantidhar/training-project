@@ -4,7 +4,7 @@
   "description": "Training project",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha ./test/createTask.test.js"
   },
   "repository": {
     "type": "git",

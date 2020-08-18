@@ -21,7 +21,7 @@ let extractToken=(req,res,next)=>{
     }
 } 
 
-router.get('/createTask',extractToken,(req,res,done)=>{
+router.get('/createTask',extractToken,(req,res)=>{
     let decoded=verifyToken(req.token);
     if(decoded==null)
     {

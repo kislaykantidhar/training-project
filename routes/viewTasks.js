@@ -43,6 +43,7 @@ router.get('/viewTasks',extractToken,(req,res)=>{
                 {
                     buff=obj.dataValues;
                     buff.comment_at="http://localhost:5227/comment?task_id="+obj.dataValues.id;
+                    buff.logTime_at="http://localhost:5227/logtime?task_id="+obj.dataValues.id;
                     val2.push(buff);
 
                 }

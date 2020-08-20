@@ -28,12 +28,11 @@ contents
 all the routes are preceded by http://localhost:5227
 ### 1. (POST) /signupAdmin and /signupUser
 In the x-www-form-urlencoded
-    ```javascript
     {
         name:"YOUR NAME",
         email:"YOUR EMAIL",
         password:"YOUR PASSWORD"
-    }```
+    }
 
 is passed. Also the password is encrypted and then stored in the database.
 In the message returned we get

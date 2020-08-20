@@ -1,7 +1,7 @@
 let chai=require('chai');
 let chaihttp=require('chai-http');
 chai.use(chaihttp);
-let expect=chai.expect;
+let expect=chai.expect; 
 let Chance=require('chance');
 let chance=new Chance();
 let email=chance.email({domain:"google.com"});

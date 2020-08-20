@@ -101,7 +101,7 @@ describe("In this test Comment system is being tested",()=>{
             comment_link1=res.body.msg[0].comment_at.split('/')[3];
             comment_link2=res.body.msg[1].comment_at.split('/')[3];
             done();
-        })
+        }) 
     })
     it("user1 tries to comment with the link he gets",(done=>{
        chai.request('http://localhost:5227')

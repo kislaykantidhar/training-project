@@ -5,7 +5,7 @@ let expect=chai.expect;
 let Chance=require('chance');
 let chance=new Chance();
 let email=chance.email({domain:"gmail.com"});
-    let name=chance.name();
+    let name=chance.name(); 
     let password=chance.string({length:9});
 describe("checking the user signup route",()=>{
     

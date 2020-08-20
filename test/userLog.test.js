@@ -87,7 +87,7 @@ describe("In this test Logging system is being tested",()=>{
             expect(res).to.have.status(200);
             expect(res.body.msg.length).to.equal(2)
             expect(res.body.msg[0]).has.property('id');
-            expect(res.body.msg[0]).has.property('title');
+            expect(res.body.msg[0]).has.property('title'); 
             expect(res.body.msg[0]).has.property('summary');
             expect(res.body.msg[0]).has.property('created_at');
             expect(res.body.msg[0]).has.property('comment_at');

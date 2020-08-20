@@ -3,7 +3,7 @@ let chaihttp=require('chai-http');
 chai.use(chaihttp);
 let Chance=require('chance');
 const { expect } = require('chai');
-let chance=new Chance();
+let chance=new Chance(); 
 let admintoken;
 let admin={name:chance.name(),email:chance.email({domain:"abc.com"}),password:chance.string({length:9})}
 let user1={name:chance.name(),email:chance.email({domain:"abc.com"}),password:chance.string({length:9})}

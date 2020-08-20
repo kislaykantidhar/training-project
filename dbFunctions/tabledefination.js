@@ -140,9 +140,16 @@ const LogTime=sequelize.define("logTimes",{
             deferrable:Deferrable.INITIALLY_IMMEDIATE
         }
     },
-    loggedAt:{
-        type:DataTypes.DATE 
+    date:{
+        type:DataTypes.DATEONLY
+    },
+    startedAt:{
+        type:DataTypes.TIME
+    },
+    endedAt:{
+        type:DataTypes.TIME
     }
+
     },{
     timestamps: false
 })
@@ -152,12 +159,12 @@ const LogTime=sequelize.define("logTimes",{
 // }).catch(err=>{
 //     console.log(err);
 // })
-// Admin.sync({force:true}).then(()=>{
-//     return User.sync({force:true})
+// Admin.sync().then(()=>{
+//     return User.sync()
 // }).then(()=>{
-//     return Tasks.sync({force:true})
+//     return Tasks.sync()
 // }).then(()=>{
-//     return Comments.sync({force:true})
+//     return Comments.sync()
 // }).then(()=>{
 //     return LogTime.sync({force:true})
 // }).then(()=>{

@@ -12,7 +12,7 @@ let user1={name:chance.name(),email:chance.email({domain:"abc.com"}),password:ch
 describe("In this test I am trying to check whether the admin is able to get the comments and log time  or not",()=>{
     it("Create admin",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupAdmin')
+        .post('/signup/Admin')
         .send(admin)
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -23,7 +23,7 @@ describe("In this test I am trying to check whether the admin is able to get the
 
     it("Create user1",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupUser')
+        .post('/signup/User')
         .send(user1)
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -33,7 +33,7 @@ describe("In this test I am trying to check whether the admin is able to get the
     })
     it("Login Admin",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/loginAdmin')
+        .post('/login/Admin')
         .send({email:admin.email,password:admin.password})
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -68,7 +68,7 @@ describe("In this test I am trying to check whether the admin is able to get the
     })
     it("user1 logs in and get its token",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/loginUser')
+        .post('/login/User')
         .send({email:user1.email,password:user1.password})
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -82,7 +82,7 @@ describe("In this test I am trying to check whether the admin is able to get the
     })
     it("user1 checks out tasks that are assigned to him,which should be 2 in number as two tasks are assigned to him",(done)=>{
         chai.request('http://localhost:5227')
-        .get('/viewTasks')
+        .get('/view/Tasks')
         .set('authorization','bearer '+usertoken1)
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -148,7 +148,7 @@ describe("In this test I am trying to check whether the admin is able to get the
       }))
       it("Now admin tries to check all the tasks he created",(done)=>{
         chai.request('http://localhost:5227')
-        .get('/viewCreatedTask')
+        .get('/view/CreatedTask')
         .set('authorization','bearer '+admintoken)
         .end((err,res)=>{
             expect(res.body.msg[0]).has.property('showComments');
@@ -156,10 +156,10 @@ describe("In this test I am trying to check whether the admin is able to get the
             expect(res.body.msg[0]).has.property('logs');
             expect(res.body.msg[1]).has.property('logs');
             expect(res.body).not.to.be.null;
-            log_link1=res.body.msg[0].logs.split('/')[3];//for task 1
-            log_link2=res.body.msg[1].logs.split('/')[3];//for task 2
-            comment_link1=res.body.msg[0].showComments.split('/')[3];//for task 1
-            comment_link2=res.body.msg[1].showComments.split('/')[3];//for task 2
+            log_link1=res.body.msg[0].logs.split('/')[3];
+            log_link2=res.body.msg[1].logs.split('/')[3];
+            comment_link1=res.body.msg[0].showComments.split('/')[3]+"/"+res.body.msg[0].showComments.split('/')[4];
+            comment_link2=res.body.msg[1].showComments.split('/')[3]+"/"+res.body.msg[1].showComments.split('/')[4];
             done();
         })
       })
@@ -205,7 +205,7 @@ describe("In this test I am trying to check whether the admin is able to get the
     })
     it("Without the right token 403 is recieved",(done)=>{
         chai.request('http://localhost:5227')
-        .get('/viewCreatedTask')
+        .get('/view/CreatedTask')
         .set('authorization','bearer nobear')
         .end((err,res)=>{
             expect(res).to.have.status(403)

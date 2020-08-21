@@ -12,7 +12,7 @@ let user3={name:chance.name(),email:chance.email({domain:"abc.com"}),password:ch
 describe("In this test ,1st I will create 1 admin and 3 user ,sign them up,\nnext admin will login and will get token\nafter this with the createTask route admin will try to create task for each of them",()=>{
     it("Create admin",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupAdmin')
+        .post('/signup/Admin')
         .send(admin)
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -23,7 +23,7 @@ describe("In this test ,1st I will create 1 admin and 3 user ,sign them up,\nnex
 
     it("Create user1",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupUser')
+        .post('/signup/User')
         .send(user1)
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -34,7 +34,7 @@ describe("In this test ,1st I will create 1 admin and 3 user ,sign them up,\nnex
 
     it("Create user2",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupUser')
+        .post('/signup/User')
         .send(user2)
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -44,7 +44,7 @@ describe("In this test ,1st I will create 1 admin and 3 user ,sign them up,\nnex
     })
     it("Create user3",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupUser')
+        .post('/signup/User')
         .send(user3)
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -54,7 +54,7 @@ describe("In this test ,1st I will create 1 admin and 3 user ,sign them up,\nnex
     })
     it("Login Admin",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/loginAdmin')
+        .post('/login/Admin')
         .send({email:admin.email,password:admin.password})
         .end((err,res)=>{
             expect(res).to.have.status(200);

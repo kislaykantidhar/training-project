@@ -11,7 +11,7 @@ let user1={name:chance.name(),email:chance.email({domain:"abc.com"}),password:ch
 describe("In this test Comment system is being tested",()=>{
     it("Create admin",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupAdmin')
+        .post('/signup/Admin')
         .send(admin)
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -22,7 +22,7 @@ describe("In this test Comment system is being tested",()=>{
 
     it("Create user1",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupUser')
+        .post('/signup/User')
         .send(user1)
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -32,7 +32,7 @@ describe("In this test Comment system is being tested",()=>{
     })
     it("Login Admin",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/loginAdmin')
+        .post('/login/Admin')
         .send({email:admin.email,password:admin.password})
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -67,7 +67,7 @@ describe("In this test Comment system is being tested",()=>{
     })
     it("user1 logs in and get its token",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/loginUser')
+        .post('/login/User')
         .send({email:user1.email,password:user1.password})
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -81,7 +81,7 @@ describe("In this test Comment system is being tested",()=>{
     })
     it("user1 checks out tasks that are assigned to him,which should be 2 in number as two tasks are assigned to him",(done)=>{
         chai.request('http://localhost:5227')
-        .get('/viewTasks')
+        .get('/view/Tasks')
         .set('authorization','bearer '+usertoken1)
         .end((err,res)=>{
             expect(res).to.have.status(200);

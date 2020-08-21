@@ -11,7 +11,7 @@ describe("checking the user signup route",()=>{
     
     it("sending new data value to get sign up",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupUser')
+        .post('/signup/User')
         .send({name:name,email:email,password:password})
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -23,7 +23,7 @@ describe("checking the user signup route",()=>{
     })
     it("sending same data value to get sign up:it wont work because email exists already",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupUser')
+        .post('/signup/User')
         .send({name:name,email:email,password:password})
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -35,7 +35,7 @@ describe("checking the user signup route",()=>{
 
     it("Loging in with the same credentials",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/loginUser')
+        .post('/login/User')
         .send({email:email,password:password})
         .end((err,res)=>{
             expect(res).to.have.status(200);
@@ -48,7 +48,7 @@ describe("checking the user signup route",()=>{
 
     it("Loging in with wrong credentials",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/loginUser')
+        .post('/login/User')
         .send({email:email,password:"wrongpass"})
         .end((err,res)=>{
             expect(res.body.msg).to.equal("Your email Id or password is invalid");
@@ -58,7 +58,7 @@ describe("checking the user signup route",()=>{
 
     it("signing up with no values:it would return 403",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupUser')
+        .post('/signup/User')
         .send({})
         .end((err,res)=>{
             expect(res).to.have.status(403);
@@ -68,7 +68,7 @@ describe("checking the user signup route",()=>{
     })
     it("signing up with password and name with spaces should return \"name\" is not allowed to be empty",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupUser')
+        .post('/signup/User')
         .send({email:chance.email(),name:"           ",password:"           "})
         .end((err,res)=>{
             expect(res.body.msg).to.equal("\"name\" is not allowed to be empty");
@@ -77,7 +77,7 @@ describe("checking the user signup route",()=>{
     })
     it("signing up with password with characters less than 8 should return \"password\" length must be at least 8 characters long",(done)=>{
         chai.request('http://localhost:5227')
-        .post('/signupUser')
+        .post('/signup/User')
         .send({email:chance.email({domain:"gmail.com"}),name:chance.name(),password:chance.string({length:6})})
         .end((err,res)=>{
             expect(res.body.msg).to.equal("\"password\" length must be at least 8 characters long");

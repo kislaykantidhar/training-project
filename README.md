@@ -26,7 +26,7 @@ contents
 
 # Routes
 all the routes are preceded by http://localhost:5227
-### 1. (POST) /signupAdmin and /signupUser
+### 1. (POST) /signup/Admin and /signup/User
 In the x-www-form-urlencoded
     
     {
@@ -42,7 +42,7 @@ In the message returned we get
          msg:"signed up successfully"
     }
 
-### 2. (POST) /loginAdmin and /loginUser
+### 2. (POST) /login/Admin and /login/User
 In the x-www-form-urlencoded
     
     {      
@@ -91,7 +91,7 @@ If the assignedTo value of the form is not available in database then this value
 
 However without the right token or with an empty title or empty summary 403(FORBIDDEN) status is given.
 
-### 4.(GET) /viewTasks
+### 4.(GET) /view/Tasks
 
 Whenever a User routes in this path with his her token,If he/she does'nt has tasks for his he/she gets 
    
@@ -171,7 +171,7 @@ if no comment is passed in the request
     }
 
 
-### 7.(GET) /viewCreatedTasks
+### 7.(GET) /view/CreatedTasks
 this route is for admin where the admin gets list of all the tasks created by him along 
 with the links to the comment and tasks for the tasks
 
@@ -199,7 +199,7 @@ else he will get a list ,something just like this
         .....
     ]}
 
-### 8.(GET) /showComments?task_id=SOMETASKID
+### 8.(GET) /view/Comments?task_id=SOMETASKID
 If there is'nt any comment for this task then
     
     {

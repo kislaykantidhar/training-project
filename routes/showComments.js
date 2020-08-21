@@ -3,22 +3,9 @@ let router=express.Router();
 const {verifyToken}=require('../services/verifyToken');
 const {getComments}=require('../dbFunctions/getComments');
 
-let extractToken=(req,res,next)=>{
-    const bearerHeader=req.headers['authorization'];
-    // console.log(bearerHeader)
-    if(bearerHeader)
-    {
-        const bearer=bearerHeader.split(' ');
-        const bearerToken=bearer[1];
-        req.token=bearerToken;
-        next();
-    }
-    else{
-        res.sendStatus(403);
-    }
-}
+let extractToken=require('../middleware/extractToken')
 
-router.get('/showComments',extractToken,(req,res)=>{
+router.get('/view/Comments',extractToken,(req,res)=>{
     let decoded=verifyToken(req.token);
     if(decoded==null)
     {

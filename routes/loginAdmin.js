@@ -5,7 +5,7 @@ let {logInAdmin}=require('../dbFunctions/logInAdmin')
 let {validPassword}=require('../services/validPassword')
 let {createToken}=require('../services/createToken');
 
-router.post('/loginAdmin',(req,res)=>{
+router.post('/login/Admin',(req,res)=>{
     if(req.body.email===undefined||req.body.password===undefined)
     {
         res.sendStatus(403);

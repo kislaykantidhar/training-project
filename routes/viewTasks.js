@@ -5,22 +5,9 @@ let {showAssignedTasks}=require('../dbFunctions/showAssignedTasks');
 
 
 
-let extractToken=(req,res,next)=>{
-    const bearerHeader=req.headers['authorization'];
-    // console.log(bearerHeader)
-    if(bearerHeader)
-    {
-        const bearer=bearerHeader.split(' ');
-        const bearerToken=bearer[1];
-        req.token=bearerToken;
-        next();
-    }
-    else{
-        res.sendStatus(403);
-    }
-} 
+let extractToken=require('../middleware/extractToken')
 
-router.get('/viewTasks',extractToken,(req,res)=>{
+router.get('/view/Tasks',extractToken,(req,res)=>{
     let decoded=verifyToken(req.token);
     if(decoded==null)
     {

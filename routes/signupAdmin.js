@@ -4,7 +4,7 @@ const {adminSignUpSchema}=require('../schemas/adminSignUpSchema');
 const {addAdmin}=require('../dbFunctions/addAdmin')
 const {encryptPassword}=require('../services/encryptPassword');
 
-router.post('/signupAdmin',(req,res)=>{
+router.post('/signup/Admin',(req,res)=>{
 
     if(req.body.name===undefined||req.body.email===undefined||req.body.password===undefined)
     res.sendStatus(403);

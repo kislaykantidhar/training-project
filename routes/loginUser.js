@@ -5,7 +5,7 @@ let {logInUser}=require('../dbFunctions/logInUser');
 let {validPassword}=require('../services/validPassword');
 let  {createToken}=require('../services/createToken');
 
-router.post('/loginUser',(req,res)=>{
+router.post('/login/User',(req,res)=>{
     if(req.body.email===undefined||req.body.password===undefined)
     {
         res.sendStatus(403);

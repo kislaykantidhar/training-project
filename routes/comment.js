@@ -6,20 +6,7 @@ let moment=require('moment');
 let {taskRow}=require('../dbFunctions/taskRow')
 let {postComments}=require('../dbFunctions/postComment')
 
-let extractToken=(req,res,next)=>{
-    const bearerHeader=req.headers['authorization'];
-    // console.log(bearerHeader)
-    if(bearerHeader)
-    {
-        const bearer=bearerHeader.split(' ');
-        const bearerToken=bearer[1];
-        req.token=bearerToken;
-        next();
-    }
-    else{
-        res.sendStatus(403);
-    }
-} 
+let extractToken=require('../middleware/extractToken')
 
 router.get('/comment',extractToken,(req,res)=>{
     let decoded=verifyToken(req.token);

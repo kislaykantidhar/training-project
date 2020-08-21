@@ -5,21 +5,8 @@ const {verifyToken}=require('../services/verifyToken');
 const {getUserId}=require('../dbFunctions/getUserId');
 const {addTask}=require('../dbFunctions/addTask');
 const {taskSchema}=require('../schemas/taskSchema');
-
-let extractToken=(req,res,next)=>{
-    const bearerHeader=req.headers['authorization'];
-    // console.log(bearerHeader)
-    if(bearerHeader)
-    {
-        const bearer=bearerHeader.split(' ');
-        const bearerToken=bearer[1];
-        req.token=bearerToken;
-        next();
-    }
-    else{
-        res.sendStatus(403);
-    }
-} 
+let extractToken=require('../middleware/extractToken')
+ 
 
 router.get('/createTask',extractToken,(req,res)=>{
     let decoded=verifyToken(req.token);

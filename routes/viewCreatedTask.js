@@ -4,22 +4,9 @@ const moment=require('moment');
 const {verifyToken}=require('../services/verifyToken');
 const {getAllTasksCreated}=require('../dbFunctions/getAllTasksCreated')
 
-let extractToken=(req,res,next)=>{
-    const bearerHeader=req.headers['authorization'];
-    // console.log(bearerHeader)
-    if(bearerHeader)
-    {
-        const bearer=bearerHeader.split(' ');
-        const bearerToken=bearer[1];
-        req.token=bearerToken;
-        next();
-    }
-    else{
-        res.sendStatus(403);
-    }
-} 
+let extractToken=require('../middleware/extractToken')
 
-router.get('/viewCreatedTask',extractToken,(req,res)=>{
+router.get('/view/CreatedTask',extractToken,(req,res)=>{
     let decoded=verifyToken(req.token);
     if(decoded==null)
     {
@@ -40,7 +27,7 @@ router.get('/viewCreatedTask',extractToken,(req,res)=>{
             for (let obj of val)
             {
                 buff=obj.dataValues;
-                buff.showComments="http://localhost:5227/showComments?task_id="+obj.dataValues.id;
+                buff.showComments="http://localhost:5227/view/Comments?task_id="+obj.dataValues.id;
                 buff.logs="http://localhost:5227/logs?task_id="+obj.dataValues.id;
                 val2.push(buff);
 

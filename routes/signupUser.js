@@ -5,7 +5,7 @@ const {encryptPassword}=require('../services/encryptPassword');
 const {addUser}=require('../dbFunctions/addUser');
 
 
-router.post('/signupUser',(req,res)=>{
+router.post('/signup/User',(req,res)=>{
     if(req.body.name===undefined||req.body.email===undefined||req.body.password===undefined)
     res.sendStatus(403);
     else{

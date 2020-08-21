@@ -1,5 +1,5 @@
-let {Comments}=require('./tabledefination');
+let {Comment}=require('../models');
 let postComments=async(model)=>{
-    return Comments.create(model);
+    return await Comment.create(model);
 }
 module.exports={postComments:postComments};

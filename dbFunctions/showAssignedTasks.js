@@ -1,6 +1,6 @@
-let {Tasks}=require('./tabledefination');
+let {Task}=require('../models');
 let showAssignedTasks=async(uid)=>{
-    return Tasks.findAll({attributes:['id','title','summary','created_at'],where:{
+    return await Task.findAll({attributes:['id','title','summary','created_at'],where:{
         assigned_to:uid
     }})
 }

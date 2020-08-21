@@ -1,5 +1,5 @@
-let {Tasks}=require('./tabledefination');
+let {Task}=require('../models');
 let getAllTasksCreated=async(id)=>{
-    return Tasks.findAll({where:{created_by:id}});
+    return await Task.findAll({where:{created_by:id}});
 }
 module.exports={getAllTasksCreated:getAllTasksCreated}

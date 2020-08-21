@@ -1,5 +1,5 @@
-const {User}=require('./tabledefination');
+const {User}=require('../models')
 let getUserId=async(email)=>{
-    return User.findOne({attributes:['id'],where:{emailid:email}});
+    return await User.findOne({attributes:['id'],where:{emailid:email}});
 }
 module.exports={getUserId:getUserId};

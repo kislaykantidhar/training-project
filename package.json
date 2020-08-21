@@ -4,8 +4,7 @@
   "description": "Training project",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text mocha",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "test": "mocha ./test/userComment.test.js"
   },
   "repository": {
     "type": "git",

@@ -1,34 +1,11 @@
 const express=require('express');
 let router=express.Router();
-const {verifyToken}=require('../services/verifyToken');
-const {getComments}=require('../dbFunctions/getComments');
 
-let extractToken=require('../middleware/extractToken')
+let extractToken=require('../middleware/extractToken');
+const show_comments = require('../middleware/show_comments');
 
 router.get('/view/Comments',extractToken,(req,res)=>{
-    let decoded=verifyToken(req.token);
-    if(decoded==null)
-    {
-        res.sendStatus(403);
-    }
-    else
-    {
-        let taskid=req.query.task_id;
-        getComments(taskid)
-        .then(val=>{
-            if(val[0]==null)
-            {
-                res.json({msg:"There is no comment for this task"})
-            }
-            else
-            {
-                res.json({msg:val})
-            }
-        })
-        .catch(err=>{
-            res.json({msg:err});
-        })
-    }
+    show_comments(req,res);
 })
 
 module.exports=router;

@@ -1,6 +1,12 @@
 const {userSignUpSchema}=require('../schemas/userSignUpSchema');
 const {encryptPassword}=require('../services/encryptPassword');
-const {addUser}=require('../dbFunctions/addUser');
+const {User}=require('../models');
+
+let addUser=async(name,email,password)=>{
+    return User.create({name:name,emailid:email,password:password});
+
+}
+
 let signupU=(req,res)=>{
     if(req.body.name===undefined||req.body.email===undefined||req.body.password===undefined)
     res.sendStatus(403);

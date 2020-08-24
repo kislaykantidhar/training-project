@@ -1,6 +1,9 @@
 const moment=require('moment');
 const {verifyToken}=require('../services/verifyToken');
-const {getAllTasksCreated}=require('../dbFunctions/getAllTasksCreated')
+let {Task}=require('../models');
+let getAllTasksCreated=async(id)=>{
+    return await Task.findAll({where:{created_by:id}});
+}
 let view_created_task=(req,res)=>{
     let decoded=verifyToken(req.token);
     if(decoded==null)

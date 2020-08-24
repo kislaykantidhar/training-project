@@ -1,7 +1,15 @@
 let {verifyToken}=require('../services/verifyToken');
 let moment=require('moment');
-let {taskRow}=require('../dbFunctions/taskRow')
-let {postComments}=require('../dbFunctions/postComment')
+let {Task}=require('../models');
+let {Comment}=require('../models');
+
+let taskRow=async(id)=>{
+    return  await Task.findByPk(id)
+}
+
+let postComments=async(model)=>{
+    return await Comment.create(model);
+}
 let commentu=(req,res)=>{
     let decoded=verifyToken(req.token);
     if(decoded==null)

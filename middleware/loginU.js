@@ -1,7 +1,12 @@
 
-let {logInUser}=require('../dbFunctions/logInUser');
+const {User}=require('../models')
+
 let {validPassword}=require('../services/validPassword');
 let  {createToken}=require('../services/createToken');
+let logInUser=async (email)=>{
+    return await User.findOne({where:{emailid:email}})
+}
+
 let loginU=(req,res)=>{
     if(req.body.email===undefined||req.body.password===undefined)
     {

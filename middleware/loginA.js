@@ -1,6 +1,11 @@
-let {logInAdmin}=require('../dbFunctions/logInAdmin')
+
 let {validPassword}=require('../services/validPassword')
 let {createToken}=require('../services/createToken');
+const {Admin}=require('../models');
+let logInAdmin=async (email)=>{
+    return await Admin.findOne({where:{emailid:email}});
+    
+}
 
 let loginA=(req,res)=>{
     if(req.body.email===undefined||req.body.password===undefined)

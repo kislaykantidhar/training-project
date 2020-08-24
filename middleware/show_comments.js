@@ -1,5 +1,10 @@
 const {verifyToken}=require('../services/verifyToken');
-const {getComments}=require('../dbFunctions/getComments');
+let {Comment}=require('../models')
+let getComments=async(taskid)=>{
+    return await Comment.findAll({where:{taskid:taskid}});
+
+}
+
 let show_comments=(req,res)=>{
     let decoded=verifyToken(req.token);
     if(decoded==null)

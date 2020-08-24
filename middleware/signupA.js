@@ -1,6 +1,11 @@
 const {adminSignUpSchema}=require('../schemas/adminSignUpSchema');
-const {addAdmin}=require('../dbFunctions/addAdmin')
+// const {addAdmin}=require('../dbFunctions/addAdmin')
+const {Admin}=require('../models');
 const {encryptPassword}=require('../services/encryptPassword');
+let  addAdmin= async (name,email,password)=>{
+    return Admin.create({name:name,emailid:email,password:password});
+        
+ }
 let signupA=(req,res)=>{
     if(req.body.name===undefined||req.body.email===undefined||req.body.password===undefined)
     res.sendStatus(403);

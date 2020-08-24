@@ -1,6 +1,9 @@
 const moment=require('moment');
 const {verifyToken}=require('../services/verifyToken');
-let {getLogDetails}=require('../dbFunctions/getLogdetails')
+let {LogTime}=require('../models')
+let getLogDetails= async(taskid)=>{
+    return await LogTime.findAll({where:{taskid:taskid}})
+}
 let loga=(req,res)=>{
     let decoded=verifyToken(req.token);
     if(decoded==null)

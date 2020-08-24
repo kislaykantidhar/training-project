@@ -1,7 +1,16 @@
 let {verifyToken} =require('../services/verifyToken')
-let {taskRow}=require('../dbFunctions/taskRow')
+let {Task}=require('../models');
+let {LogTime}=require('../models');
 let {timeSchema}=require('../schemas/timeSchema');
-let {addLogTime}=require('../dbFunctions/addLogTime');
+
+
+let taskRow=async(id)=>{
+    return  await Task.findByPk(id)
+}
+
+let addLogTime=async(taskid,date,startedAt,endedAt)=>{
+    return LogTime.create({taskid:taskid,date:date,startedAt:startedAt,endedAt:endedAt});
+}
 let moment=require('moment');
 
 let log_time=(req,res)=>{

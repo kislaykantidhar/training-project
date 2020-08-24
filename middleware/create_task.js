@@ -1,8 +1,16 @@
 const moment=require('moment');
 const {verifyToken}=require('../services/verifyToken');
-const {getUserId}=require('../dbFunctions/getUserId');
-const {addTask}=require('../dbFunctions/addTask');
 const {taskSchema}=require('../schemas/taskSchema');
+const {Task}=require('../models');
+const {User}=require('../models');
+
+let addTask= async(model)=>{
+    return Task.create({created_by:model.created_by,title:model.title_of_task,summary:model.summary_of_the_task,assigned_to:model.assigned_to,created_at:model.created_at,status:model.status})
+}
+
+let getUserId=async(email)=>{
+    return await User.findOne({attributes:['id'],where:{emailid:email}});
+}
 
 let create_task=(req,res)=>{
     let decoded=verifyToken(req.token);

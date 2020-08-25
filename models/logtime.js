@@ -4,6 +4,7 @@ const {
 } = require('sequelize');
 
 const {Task}=require('./task');
+
 module.exports = (sequelize, DataTypes) => {
   class LogTime extends Model {
     /**
@@ -13,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      LogTime.hasOne(models.Logsummary)
     }
   }; 
   LogTime.init({
@@ -31,6 +33,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       endedAt:{
           type:DataTypes.TIME
+      },
+      timeSpent:{
+        type: DataTypes.INTEGER
       }
   }, {
     sequelize,

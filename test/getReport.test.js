@@ -110,7 +110,7 @@ describe("In this test I am trying to check whether the admin is able to get the
        chai.request('http://localhost:5227')
        .get("/"+log_link1)
        .set('authorization','bearer '+usertoken1)
-       .send({startedAt:"10:43",endedAt:"15:23"})
+       .send({startedAt:"10:43",endedAt:"15:23",summary:"blah-blah1"})
        .end((err,res)=>{
            expect(res.body.msg).to.equal("Time Logged!");
            done();
@@ -120,7 +120,7 @@ describe("In this test I am trying to check whether the admin is able to get the
         chai.request('http://localhost:5227')
         .get("/"+log_link2)
         .set('authorization','bearer '+usertoken1)
-        .send({startedAt:"10:44",endedAt:"15:24"})
+        .send({startedAt:"10:44",endedAt:"15:24",summary:"blah-blah2"})
         .end((err,res)=>{
             expect(res.body.msg).to.equal("Time Logged!");
             done();
@@ -170,6 +170,7 @@ describe("In this test I am trying to check whether the admin is able to get the
           .end((err,res)=>{
               expect(res.body.msg[0].startedAt).to.equal("10:43:00")
               expect(res.body.msg[0].endedAt).to.equal("15:23:00")
+              expect(res.body.msg[0].Logsummary.summary).to.equal("blah-blah1")
               done()
           })
       })
@@ -190,6 +191,7 @@ describe("In this test I am trying to check whether the admin is able to get the
         .end((err,res)=>{
             expect(res.body.msg[0].startedAt).to.equal("10:44:00")
             expect(res.body.msg[0].endedAt).to.equal("15:24:00")
+            expect(res.body.msg[0].Logsummary.summary).to.equal("blah-blah2")
             done()
         }) 
     })

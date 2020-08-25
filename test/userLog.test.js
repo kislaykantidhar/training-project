@@ -107,7 +107,7 @@ describe("In this test Logging system is being tested",()=>{
        chai.request('http://localhost:5227')
        .get("/"+log_link1)
        .set('authorization','bearer '+usertoken1)
-       .send({startedAt:"10:45",endedAt:"15:20"})
+       .send({startedAt:"10:45",endedAt:"15:20",summary:"blah-blah"})
        .end((err,res)=>{
            expect(res.body.msg).to.equal("Time Logged!");
            done();
@@ -117,7 +117,7 @@ describe("In this test Logging system is being tested",()=>{
         chai.request('http://localhost:5227')
         .get("/"+log_link2)
         .set('authorization','bearer '+usertoken1)
-        .send({startedAt:"10:45",endedAt:"15:20"})
+        .send({startedAt:"10:45",endedAt:"15:20",summary:"blah-blah2"})
         .end((err,res)=>{
             expect(res.body.msg).to.equal("Time Logged!");
             done();

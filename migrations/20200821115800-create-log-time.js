@@ -23,6 +23,9 @@ module.exports = {
       },
       endedAt: {
         type: Sequelize.TIME
+      },
+      timeSpent:{
+        type: Sequelize.INTEGER
       }
     });
   },

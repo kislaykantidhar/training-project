@@ -1,5 +1,5 @@
 const express=require('express');
-const loginU = require('../middleware/loginU');
+const loginU = require('../business_logic/loginU');
 const router=express.Router();
 
 router.post('/login/User',(req,res)=>{

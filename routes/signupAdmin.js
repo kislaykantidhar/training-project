@@ -1,5 +1,5 @@
 const express=require('express');
-const signupA = require('../middleware/signupA');
+const signupA = require('../business_logic/signupA');
 router=express.Router();
 
 
